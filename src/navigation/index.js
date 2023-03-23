@@ -1,8 +1,25 @@
+import {useState} from "react";
+import search from "../search";
+import Search from "../search";
+import {useNavigate} from "react-router-dom";
+
 const Navigation = (
     {
         active = 'explore'
     }
 ) => {
+    const [searchValue, setSearchValue] = useState("")
+
+    const editSearch = (event) => {
+        const newText = event.target.value
+        setSearchValue(newText);
+    };
+    const navigate = useNavigate()
+
+    const submitSearch = () => {
+        navigate(`/search/${searchValue}`)
+    }
+
     return(<nav className="navbar navbar-expand-lg navbar-dark bg-dark m-2 ">
         <div className="container-fluid">
             <a className="navbar-brand" href="#">Navbar</a>
@@ -39,8 +56,8 @@ const Navigation = (
                     </li>
                 </ul>
                 <form className="d-flex">
-                    <input className="form-control me-sm-2" type="search" placeholder="Search"/>
-                        <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <input className="form-control me-sm-2" type="search" placeholder="Search" onChange={editSearch}/>
+                        <button className="btn btn-secondary my-2 my-sm-0" type="submit" onClick={submitSearch}>Search</button>
                 </form>
             </div>
         </div>
