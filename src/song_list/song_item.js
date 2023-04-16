@@ -1,8 +1,8 @@
 import React from "react";
+import {Chat, ArrowRepeat, HeartFill, Heart, Share, HandThumbsDown, HandThumbsDownFill} from "react-bootstrap-icons";
 const SongItem = (
     {
-        song = { name: 'Honeybee', artist: 'Unknown Mortal Orchestra', image: 'umo.png' ,
-        date: '3/21/23', favorite: 1}
+        song = { name: 'Honeybee', artist: 'Unknown Mortal Orchestra', image: 'umo.png'}
     }
 ) => {
     return(
@@ -11,8 +11,11 @@ const SongItem = (
                 <img className="rounded-2" style={{width: "150px", height: "150px"}} src={ song.image }/>
                 <div className="ps-2">
                     <h4 className="mb-0 pt-1">{song.name}
-                        <i className="bi bi-heart ps-1 pe-2"></i>
+                        {/*<Heart/>*/}
+                        {/*<HeartFill color="red"/>*/}
+                        {/*<i className="bi bi-heart ps-1 pe-2"></i>*/}
                     </h4>
+                    <Heart/>
                     <div>{song.artist}</div>
                 </div>
             </div>
