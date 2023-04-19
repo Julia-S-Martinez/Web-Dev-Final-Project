@@ -1,4 +1,4 @@
-const Post = (
+const Details = (
     {}
 ) => {
     return(<><div className="card mb-3 mx-2">
@@ -30,4 +30,4 @@ const Post = (
     </div></>)
 };
 
-export default Post;
+export default Details;

@@ -1,9 +1,22 @@
 import {useState} from "react";
 import {loginThunk} from "../services/users-thunks";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
-const Login = (
-    {}
-) => {
+function Login() {
+    const { currentUser } = useSelector((state) => state.users);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const login = async () => {
+        try {
+            await dispatch(loginThunk({ username, password }));
+            navigate("/profile");
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const [register, setRegister] = useState(true);
 
