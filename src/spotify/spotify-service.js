@@ -1,6 +1,6 @@
 import axios from "axios";
 export const SPOTIFY_API = "https://api.spotify.com/v1";
-export const SPOTIFY_KEY = process.env.SPOTIFY_API_KEY;
+export const SPOTIFY_KEY = process.env.REACT_APP_SPOTIFY_API_KEY;
 // export const ALBUM_API = "http://localhost:4000/api/albums";
 
 const api = axios.create({
@@ -12,7 +12,7 @@ export const fullTextSearch = async (query) => {
         `${SPOTIFY_API}/search?q=${query}&type=track&limit=10&&access_token=${SPOTIFY_KEY}`
     );
     const json = await response.data;
-    return json.search.data.albums;
+    return json.tracks.items;
 };
 
 export const getAlbum = async (albumId) => {
