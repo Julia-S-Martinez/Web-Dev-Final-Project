@@ -14,7 +14,7 @@ function SpotifySearchScreen() {
         searchSpotify()
     }, []);
     return (
-        <div>
+        <div className="w-50 m-auto">
             {songs && songs.map((result) =>
                 <SongItem key= {result.trackId} song={result}/>
             )}
