@@ -1,6 +1,4 @@
 import {useState} from "react";
-import search from "../search";
-import Search from "../search";
 import {useNavigate} from "react-router-dom";
 
 const Navigation = (

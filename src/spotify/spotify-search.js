@@ -5,14 +5,14 @@ import SongItem from "../song_list/song_item";
 function SpotifySearchScreen() {
     const query = useParams().query;
     const [songs, setSongs] = useState([]);
-    const searchSpotify = async () => {
-        const results = await fullTextSearch(query);
-        setSongs(results);
-        return;
-    };
     useEffect(() => {
+        const searchSpotify = async () => {
+            const results = await fullTextSearch(query);
+            setSongs(results);
+            return;
+        };
         searchSpotify()
-    }, []);
+    }, [query]);
     return (
         <div className="w-50 m-auto">
             {songs && songs.map((result) =>

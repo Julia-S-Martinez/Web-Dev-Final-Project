@@ -28,6 +28,7 @@ export const deleteUser = (id) => {
 };
 
 export const login = (user) => {
+  console.log("logging in");
   return api.post(`${USERS_API_URL}/login`, user);
 };
 
@@ -36,6 +37,7 @@ export const logout = () => {
 };
 
 export const register = (user) => {
+  console.log("registering");
   return api.post(`${USERS_API_URL}/register`, user);
 };
 

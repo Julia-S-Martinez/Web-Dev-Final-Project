@@ -10,9 +10,12 @@ import EditProfile from "./profile/edit-profile";
 import SpotifySearchScreen from "./spotify/spotify-search";
 import Profile from "./profile";
 import Details from "./details";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
+      <Provider store={store}>
       <div className="container-fluid">
           <BrowserRouter>
               <Navigation/>
@@ -27,6 +30,7 @@ function App() {
               </Routes>
           </BrowserRouter>
       </div>
+      </Provider>
   );
 }
 
