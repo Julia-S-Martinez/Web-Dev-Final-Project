@@ -9,11 +9,6 @@ const Navigation = (
     }
 ) => {
     const [searchValue, setSearchValue] = useState("")
-
-    const editSearch = (event) => {
-        const newText = event.target.value
-        setSearchValue(newText);
-    };
     const navigate = useNavigate()
 
     const submitSearch = () => {
@@ -30,7 +25,7 @@ const Navigation = (
                 </button>
                 <div className="collapse navbar-collapse" id="navbarColor02">
                     <form className="d-flex">
-                        <input className="form-control me-sm-2 w-full" type="search" placeholder="Search" onChange={editSearch}/>
+                        <input className="form-control me-sm-2 w-full" type="search" placeholder="Search" onChange={(e) => setSearchValue(e.target.value)}/>
                         <button className="btn btn-secondary my-2 my-sm-0" type="submit" onClick={submitSearch}>Search</button>
                     </form>
                     <ul className="navbar-nav ms-auto">
