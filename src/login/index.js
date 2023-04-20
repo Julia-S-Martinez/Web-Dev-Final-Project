@@ -9,9 +9,9 @@ function Login() {
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const submitRegister = () => {
+    const submitRegister = async () => {
         try {
-            dispatch(registerThunk({ username, password }));
+            await dispatch(registerThunk({username, password}));
             navigate("/profile");
         } catch (err) {
             console.log(err);
