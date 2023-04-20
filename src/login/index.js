@@ -8,11 +8,11 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const login = async () => {
         try {
             await dispatch(loginThunk({ username, password }));
-            navigate("/profile");
+            //navigate("/profile");
         } catch (err) {
             console.log(err);
         }
