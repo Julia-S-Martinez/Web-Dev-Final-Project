@@ -9,7 +9,9 @@ function Recommended() {
 
     useEffect(() => {
         const fetchSongs = async () => {
-            const songs = await findPosts(currentUser);
+            const songIds = await findPosts(currentUser);
+            const songs = songIds.map(async (id) =>
+                await fetchTrack(id));
             setSongs(songs);
         }
         fetchSongs()
