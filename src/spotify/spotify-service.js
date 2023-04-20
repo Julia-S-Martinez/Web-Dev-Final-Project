@@ -24,12 +24,22 @@ export const getAlbum = async (albumId) => {
 };
 
 export const getTracks = async (albumId) => {
+    console.log(`${SPOTIFY_API}/albums/${albumId}/tracks?apikey=${SPOTIFY_KEY}`);
     const response = await axios.get(
         `${SPOTIFY_API}/albums/${albumId}/tracks?apikey=${SPOTIFY_KEY}`
     );
     const json = await response.data;
     return json.tracks;
 };
+
+export const getTrack = async (songId) => {
+    const response = await axios.get(
+        `${SPOTIFY_API}/tracks/${songId}?access_token=${SPOTIFY_KEY}`
+    )
+    const json = await response.data;
+    console.log("response: " + json);
+    return json.album;
+}
 
 // export const likeAlbum = async (album) => {
 //     const response = await api.post(`${ALBUM_API}/${album.albumId}/likes`, album);

@@ -1,8 +1,9 @@
 import React from "react";
 import {Chat, ArrowRepeat, HeartFill, Heart, Share, HandThumbsDown, HandThumbsDownFill} from "react-bootstrap-icons";
+import {Link} from "react-router-dom";
 const SongItem = (
     {
-        song = { name: 'Honeybee', artist: 'Unknown Mortal Orchestra', image: 'umo.png'}
+        song = { name: 'Honeybee', artists: 'Unknown Mortal Orchestra', image: 'umo.png'}
     }
 ) => {
     return(
@@ -16,7 +17,10 @@ const SongItem = (
                         {/*<i className="bi bi-heart ps-1 pe-2"></i>*/}
                     </h4>
                     <Heart/>
-                    <div>{song.artist}</div>
+                    <div>{song.artists.map((artist) => artist.name)}</div>
+                    <Link to={`/details/${song.id}`}>
+                        See Details
+                    </Link>
                 </div>
             </div>
         </div>
