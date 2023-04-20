@@ -23,7 +23,7 @@ function App() {
                   <Route path="/edit-profile" element={<EditProfile/>}/>
                   <Route path="/search/:query" element={<SpotifySearchScreen/>}/>
                   <Route path="/profile/:uid" element={<Profile/>}/>
-                  <Route path="/details/sid" element={<Details/>}/>
+                  <Route path="/details/:sid" element={<Details />}/>
               </Routes>
           </BrowserRouter>
       </div>
