@@ -37,6 +37,7 @@ export const getTrack = async (songId) => {
         `${SPOTIFY_API}/tracks/${songId}?access_token=${SPOTIFY_KEY}`
     )
     const json = await response.data;
+    console.log("response: " + json);
     return json.album;
 }
 
