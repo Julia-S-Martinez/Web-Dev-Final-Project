@@ -1,5 +1,5 @@
 import axios from "axios";
-const POSTS_API_URL = "http://localhost:4000/api/posts";
+const POSTS_API_URL = process.env.REACT_APP_API + "post";
 
 const api = axios.create({
     withCredentials: true,

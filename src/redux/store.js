@@ -3,7 +3,7 @@ import usersReducer from "./users-reducer";
 
 const store = configureStore({
     reducer: {
-        users: usersReducer,
+        currentUser: usersReducer,
     },
 });
 

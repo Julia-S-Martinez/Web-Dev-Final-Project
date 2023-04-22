@@ -31,7 +31,11 @@ export const getTracks = async (albumId) => {
     return json.tracks;
 };
 
-// export const likeAlbum = async (album) => {
-//     const response = await api.post(`${ALBUM_API}/${album.albumId}/likes`, album);
-//     return response.data;
-// };
+export const getTrack = async (songId) => {
+    const response = await axios.get(
+        `${SPOTIFY_API}/tracks/${songId}?access_token=${SPOTIFY_KEY}`
+    )
+    const json = await response.data;
+    console.log("response: " + json);
+    return json.album;
+}

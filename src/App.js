@@ -5,7 +5,7 @@ import Home from "./home";
 
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-import MyProfile from "./profile/my-profile";
+import MyProfile from "./profile/profile";
 import EditProfile from "./profile/edit-profile";
 import SpotifySearchScreen from "./spotify/spotify-search";
 import Profile from "./profile";

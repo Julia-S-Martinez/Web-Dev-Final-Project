@@ -1,4 +1,3 @@
-import SpotifySearchScreen from "../spotify/spotify-search";
 import Recommended from "./recommended";
 
 const Home = (
@@ -6,7 +5,7 @@ const Home = (
     return(
         <>
             <h2>Recently Liked Songs</h2>
-            <Recommended />
+            {/*<Recommended />*/}
         </>
     )
 };
