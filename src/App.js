@@ -24,7 +24,7 @@ function App() {
               <Routes>
                   <Route index element={<Home/>}/>
                   <Route path="/login" element={<Login/>}/>
-                  <Route path="/my-profile" element={<MyProfile/>}/>
+                  <Route path="/profile" element={<Profile/>}/>
                   <Route path="/edit-profile" element={<EditProfile/>}/>
                   <Route path="/search/:query" element={<SpotifySearchScreen/>}/>
                   <Route path="/profile/:uid" element={<Profile/>}/>
