@@ -24,6 +24,7 @@ export const getAlbum = async (albumId) => {
 };
 
 export const getTracks = async (albumId) => {
+    console.log(`${SPOTIFY_API}/albums/${albumId}/tracks?apikey=${SPOTIFY_KEY}`);
     const response = await axios.get(
         `${SPOTIFY_API}/albums/${albumId}/tracks?apikey=${SPOTIFY_KEY}`
     );

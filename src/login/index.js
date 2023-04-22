@@ -22,7 +22,7 @@ function Login() {
     const submitLogin = async () => {
         try {
             await dispatch(loginThunk({ username, password }));
-            navigate("/profile");
+            //navigate("/profile");
         } catch (err) {
             alert(err);
         }
