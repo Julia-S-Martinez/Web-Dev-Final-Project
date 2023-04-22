@@ -32,10 +32,11 @@ export const updateUser = async (user) => {
 };
 
 
-export const register = async ({ username, password }) => {
+export const register = async ({ username, password, role }) => {
     const response = await api.post(`${USERS_URL}/register`, {
         username,
         password,
+        role
     });
     return response.data;
 };

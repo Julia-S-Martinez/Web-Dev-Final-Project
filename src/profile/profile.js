@@ -3,7 +3,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import SongList from "../song_list";
 import {useDispatch, useSelector} from "react-redux";
 import {findFollowsByFollowedId, findFollowsByFollowerId, userFollowsUser} from "../services/follows-service";
-import {profileThunk, updateUserThunk} from "../services/users-thunks";
+import {profileThunk, updateUserThunk} from "../services/auth-thunks";
 import {findLikesByUserId, findUserById} from "../services/users-service";
 const Profile = () => {
     const { userId } = useParams();

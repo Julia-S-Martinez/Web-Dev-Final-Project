@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {loginThunk, registerThunk} from "../services/users-thunks";
+import {loginThunk, registerThunk} from "../services/auth-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

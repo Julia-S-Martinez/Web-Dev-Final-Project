@@ -31,24 +31,3 @@ export const updateUser = (newUser) => {
 export const deleteUser = (id) => {
   return axios.delete(`${USERS_API_URL}/${id}`);
 };
-
-export const login = async ({ username, password, role}) => {
-  const response = await api.post(`${USERS_API_URL}/login`, {
-    username,
-    password,
-    role,
-  });
-  const user = response.data;
-  return user;
-}
-export const logout = () => {
-  return api.post(`${USERS_API_URL}/logout`);
-};
-
-export const register = (user) => {
-  return api.post(`${USERS_API_URL}/register`, user);
-};
-
-export const profile = () => {
-  return api.get(`${USERS_API_URL}/profile`);
-};
