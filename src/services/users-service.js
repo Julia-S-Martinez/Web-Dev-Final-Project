@@ -1,5 +1,5 @@
 import axios from "axios";
-const USERS_API_URL = "http://localhost:4000/api/users";
+const USERS_API_URL = process.env.REACT_APP_API + "user";
 
 const api = axios.create({
   withCredentials: true,
@@ -11,8 +11,13 @@ export const findAllUsers = async () => {
 };
 
 export const findUserById = async (id) => {
-  const response = await axios.get(`${USERS_API_URL}/userId/${id}`);
+  const response = await axios.get(`${USERS_API_URL}/${id}`);
   return response.data;
+};
+
+export const findLikesByUserId = async (id) => {
+  const response = await axios.get(`${USERS_API_URL}/${id}`);
+  return response.data.liked_songs;
 };
 
 export const createUser = (user) => {
@@ -27,10 +32,15 @@ export const deleteUser = (id) => {
   return axios.delete(`${USERS_API_URL}/${id}`);
 };
 
-export const login = (user) => {
-  return api.post(`${USERS_API_URL}/login`, user);
-};
-
+export const login = async ({ username, password, role}) => {
+  const response = await api.post(`${USERS_API_URL}/login`, {
+    username,
+    password,
+    role,
+  });
+  const user = response.data;
+  return user;
+}
 export const logout = () => {
   return api.post(`${USERS_API_URL}/logout`);
 };

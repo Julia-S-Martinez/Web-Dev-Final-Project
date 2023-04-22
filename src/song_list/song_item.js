@@ -7,7 +7,7 @@ const SongItem = (
     }
 ) => {
     return(
-        <div className="p-1 ps-0">
+        <div className="p-1 ps-0" >
             <div className="d-flex border border-white border-1 rounded-3 p-1">
                 <img className="rounded-2" style={{width: "150px", height: "150px"}} src={ song.album.images[0].url }/>
                 <div className="ps-2">

@@ -5,16 +5,19 @@ import Home from "./home";
 
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-import MyProfile from "./profile/my-profile";
+import MyProfile from "./profile/profile";
 import EditProfile from "./profile/edit-profile";
 import SpotifySearchScreen from "./spotify/spotify-search";
 import Profile from "./profile";
 import Details from "./details";
-import store from "./redux/store";
 import {Provider} from "react-redux";
+import store from "./redux/store";
+import CurrentUserContext from "./services/current-user-context";
 
 function App() {
   return (
+      <Provider store={store}>
+          <CurrentUserContext>
       <div className="container-fluid">
           <Provider store={store}>
           <BrowserRouter>
@@ -22,7 +25,7 @@ function App() {
               <Routes>
                   <Route index element={<Home/>}/>
                   <Route path="/login" element={<Login/>}/>
-                  <Route path="/my-profile" element={<MyProfile/>}/>
+                  <Route path="/profile" element={<Profile/>}/>
                   <Route path="/edit-profile" element={<EditProfile/>}/>
                   <Route path="/search/:query" element={<SpotifySearchScreen/>}/>
                   <Route path="/profile/:uid" element={<Profile/>}/>
@@ -31,6 +34,8 @@ function App() {
           </BrowserRouter>
           </Provider>
       </div>
+              </CurrentUserContext>
+      </Provider>
   );
 }
 

@@ -40,8 +40,3 @@ export const getTrack = async (songId) => {
     console.log("response: " + json);
     return json.album;
 }
-
-// export const likeAlbum = async (album) => {
-//     const response = await api.post(`${ALBUM_API}/${album.albumId}/likes`, album);
-//     return response.data;
-// };

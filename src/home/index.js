@@ -1,11 +1,11 @@
-import SpotifySearchScreen from "../spotify/spotify-search";
+import Recommended from "./recommended";
 
 const Home = (
 ) => {
     return(
         <>
-            <h2>Home</h2>
-            <SpotifySearchScreen />
+            <h2>Recently Liked Songs</h2>
+            {/*<Recommended />*/}
         </>
     )
 };

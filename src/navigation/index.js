@@ -1,15 +1,11 @@
 import {useState} from "react";
-import search from "../search";
-import Search from "../search";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
-const Navigation = (
-    {
-        active = 'explore'
-    }
-) => {
+const Navigation = () => {
     const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate()
+    const { currentUser } = useSelector((state) => state.currentUser);
 
     const submitSearch = () => {
         navigate(`/search/${searchValue}`)
@@ -34,12 +30,12 @@ const Navigation = (
                                 <span className="visually-hidden">(current)</span>
                             </a>
                         </li>
-                        <li className="nav-item">
+                        {!currentUser && <li className="nav-item">
                             <a className="nav-link" href="/login">Login/Register</a>
-                        </li>
-                        <li className="nav-item ml-auto">
-                            <a className="nav-link" href="/my-profile">Profile</a>
-                        </li>
+                        </li>}
+                        {currentUser && <li className="nav-item ml-auto">
+                            <a className="nav-link" href="/profile">Profile</a>
+                        </li>}
                     </ul>
                 </div>
             </div>
