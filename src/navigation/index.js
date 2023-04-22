@@ -38,7 +38,7 @@ const Navigation = (
                             <a className="nav-link" href="/login">Login/Register</a>
                         </li>
                         <li className="nav-item ml-auto">
-                            <a className="nav-link" href="/my-profile">Profile</a>
+                            <a className="nav-link" href="/profile">Profile</a>
                         </li>
                     </ul>
                 </div>

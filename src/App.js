@@ -1,11 +1,12 @@
 import Navigation from "./navigation";
 import Login from "./login";
+import ProfileScreen from "./profile/profile-screen";
 // import Search from "./search";
 import Home from "./home";
 
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-import MyProfile from "./profile/my-profile";
+import MyProfile from "./profile/profile-screen";
 import EditProfile from "./profile/edit-profile";
 import SpotifySearchScreen from "./spotify/spotify-search";
 import Profile from "./profile";
@@ -22,10 +23,10 @@ function App() {
               <Routes>
                   <Route index element={<Home/>}/>
                   <Route path="/login" element={<Login/>}/>
-                  <Route path="/my-profile" element={<MyProfile/>}/>
+                  <Route path="/profile" element={<MyProfile/>}/>
                   <Route path="/edit-profile" element={<EditProfile/>}/>
                   <Route path="/search/:query" element={<SpotifySearchScreen/>}/>
-                  <Route path="/profile/:uid" element={<Profile/>}/>
+                  <Route path="/profile/:uid" element={<ProfileScreen/>}/>
                   <Route path="/details/:sid" element={<Details />}/>
               </Routes>
           </BrowserRouter>
