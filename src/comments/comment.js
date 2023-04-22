@@ -1,10 +1,10 @@
 const Comment = () => {
     return(
-        <div className="row">
-            <div className="col-3">
-                <img className="w-75 rounded-5" src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"/>
+        <div className="row d-flex align-items-center">
+            <div className="col-2">
+                <img className="w-75 rounded-circle" src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"/>
             </div>
-            <div className="col-9">
+            <div className="col-10">
                 <div>
                     <div className="fw-bold">
                         Username

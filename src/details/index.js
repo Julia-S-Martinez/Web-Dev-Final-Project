@@ -22,22 +22,58 @@ function Details() {
 
     return(
         <>
-            {song && <div className="card w-50 m-auto">
-                <div className="d-flex">
-                    <div>
-                        <img className="" src={song.images[0].url}/>
-                    </div>
-                    <div className="ms-4 mt-4">
-                        <div className="fw-bold" style={{fontSize: '50px', }}>{song.name}</div>
-                        <div className="mb-5">{song.artists.map((artist) => artist.name + ' ')}</div>
-                        <div>{song.release_date}</div>
-                        <div>
-                            <h2>Comments</h2>
-                            <Comment />
-                        </div>
+            {/*bigger screens*/}
+            <div className="container card d-none d-lg-none d-xl-block">
+                <div className="row">
+                    <div className="ps-0">
+                        {song && (
+                            <div className="w-100 w-md-50 m-auto">
+                                <div className="d-flex">
+                                    <div>
+                                        <img className="" src={song.album.images[0].url} />
+                                    </div>
+                                    <div className="ms-4 mt-4">
+                                        <div className="fw-bold" style={{ fontSize: "50px" }}>
+                                            {song.name} - {song.artists.map((artist) => artist.name + " ")}
+                                        </div>
+                                        <div className="mb-5" style={{ fontSize: "30px" }}>{song.album.release_date}</div>
+                                        <div className="mb-3">
+                                            <h2>Comments</h2>
+                                            <Comment />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-            </div>}
+            </div>
+            {/*smaller screens*/}
+            <div className="container card d-block d-xl-none">
+                <div className="row">
+                    <div className="">
+                        {song && (
+                            <div className="w-100 w-md-50 m-auto">
+                                <div className="">
+                                    <div>
+                                        <img className="w-100" src={song.album.images[0].url} />
+                                    </div>
+                                    <div className="ms-4 mt-4">
+                                        <div className="fw-bold" style={{ fontSize: "50px" }}>
+                                            {song.name} - {song.artists.map((artist) => artist.name + " ")}
+                                        </div>
+                                        <div>{song.album.release_date}</div>
+                                        <div className="mb-3">
+                                            <h2>Comments</h2>
+                                            <Comment />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
         </>)
 };
 

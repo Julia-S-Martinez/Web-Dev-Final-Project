@@ -3,25 +3,33 @@ import SongItem from "../song_list/song_item";
 import {useSelector} from "react-redux";
 import {findPosts} from "../services/posts-service";
 import {getTrack} from "../spotify/spotify-service";
+import SongItemWithName from "../song_list/song_item_with_name";
+import songArray from "./home-songs.json";
 
 function Recommended() {
     const { currentUser } = useSelector((state) => state.currentUser);
-    const [songs, setSongs] = useState([]);
-
+    const [songs, setSongs] = useState();
+    const fetchSongs = async () => {
+        const recommendedList = songArray;
+        const promises = recommendedList.map(async (id) => {
+            let song = await getTrack(id.sid);
+            song.username = id.username;
+            console.log(song);
+            return song;
+        });
+        const s = await Promise.all(promises);
+        // console.log("s before setSongs" + (s.map(song => song.images[0].url)));
+        console.log("recommendedList: " + recommendedList);
+        setSongs(s);
+        console.log("songs list:" + s);
+    }
     useEffect(() => {
-        const fetchSongs = async () => {
-            const songIds = await findPosts(currentUser);
-            const songs = songIds.map(async (id) =>
-                await getTrack(id));
-            setSongs(songs);
-            console.log(songs);
-        }
         fetchSongs()
     }, []);
     return (
         <div className="w-50 m-auto">
             {songs && songs.map((result) =>
-                <SongItem key= {result.trackId} song={result}/>
+                <SongItemWithName song={result}/>
             )}
         </div>
     );
