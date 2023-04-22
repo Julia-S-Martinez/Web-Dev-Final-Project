@@ -3,13 +3,12 @@ import {Chat, ArrowRepeat, HeartFill, Heart, Share, HandThumbsDown, HandThumbsDo
 import {Link} from "react-router-dom";
 const SongItemWithName = (
     {
-        name=  { name: "emilygringorten" },
-        song = { name: 'Honeybee', artists: 'Unknown Mortal Orchestra', image: 'umo.png'}
+        song = { name: 'Honeybee', artists: 'Unknown Mortal Orchestra', image: 'umo.png', username: 'test'}
     }
 ) => {
     return(
         <div className="p-1 ps-0">
-            <p>{name.name} recommends</p>
+            <p>{song.username} recommends</p>
             <div className="d-flex border border-white border-1 rounded-3 p-1">
                 <img className="rounded-2" style={{width: "150px", height: "150px"}} src={ song.album.images[0].url }/>
                 <div className="ps-2">

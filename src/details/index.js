@@ -25,21 +25,18 @@ function Details() {
             {/*bigger screens*/}
             <div className="container card d-none d-lg-none d-xl-block">
                 <div className="row">
-                    <div className="">
+                    <div className="ps-0">
                         {song && (
                             <div className="w-100 w-md-50 m-auto">
                                 <div className="d-flex">
                                     <div>
-                                        <img className="" src={song.images[0].url} />
+                                        <img className="" src={song.album.images[0].url} />
                                     </div>
                                     <div className="ms-4 mt-4">
                                         <div className="fw-bold" style={{ fontSize: "50px" }}>
-                                            {song.name}
+                                            {song.name} - {song.artists.map((artist) => artist.name + " ")}
                                         </div>
-                                        <div className="mb-2">
-                                            {song.artists.map((artist) => artist.name + " ")}
-                                        </div>
-                                        <div>{song.release_date}</div>
+                                        <div className="mb-5" style={{ fontSize: "30px" }}>{song.album.release_date}</div>
                                         <div className="mb-3">
                                             <h2>Comments</h2>
                                             <Comment />
@@ -59,16 +56,13 @@ function Details() {
                             <div className="w-100 w-md-50 m-auto">
                                 <div className="">
                                     <div>
-                                        <img className="w-100" src={song.images[0].url} />
+                                        <img className="w-100" src={song.album.images[0].url} />
                                     </div>
                                     <div className="ms-4 mt-4">
                                         <div className="fw-bold" style={{ fontSize: "50px" }}>
-                                            {song.name}
+                                            {song.name} - {song.artists.map((artist) => artist.name + " ")}
                                         </div>
-                                        <div className="mb-2">
-                                            {song.artists.map((artist) => artist.name + " ")}
-                                        </div>
-                                        <div>{song.release_date}</div>
+                                        <div>{song.album.release_date}</div>
                                         <div className="mb-3">
                                             <h2>Comments</h2>
                                             <Comment />
