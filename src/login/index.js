@@ -3,6 +3,7 @@ import {loginThunk, registerThunk} from "../services/auth-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+
 function Login() {
     const { currentUser } = useSelector((state) => state.currentUser);
     const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ function Login() {
     const submitLogin = async () => {
         try {
             await dispatch(loginThunk({ username, password }));
-            //navigate("/profile");
+            navigate("/profile");
         } catch (err) {
             alert(err);
         }
