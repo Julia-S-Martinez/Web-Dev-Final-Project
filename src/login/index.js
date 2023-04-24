@@ -1,21 +1,34 @@
 import {useState} from "react";
 import {loginThunk, registerThunk} from "../services/auth-thunks";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import store from "../redux/store";
 
 
 function Login() {
-    const { currentUser } = useSelector((state) => state.currentUser);
+    let {currentUser} = useSelector((state) => state.currentUser);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [artist, setArtist] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const submitRegister = async () => {
         try {
-            const role = (artist ? "ARTIST" : "LISTENER");
-            await dispatch(registerThunk({username, password, role}));
-            navigate("/profile");
+            const role = artist ? "ARTIST" : "LISTENER";
+            const newUser = {
+                "username" : username,
+                "password" : password,
+                "role": role
+            }
+            console.log(newUser);
+
+            currentUser = (await store.dispatch(registerThunk(
+                {
+                    "username" : username,
+                    "password" : password,
+                    "role": role
+                })));
+            // navigate("/profile");
         } catch (err) {
             alert(err);
         }
@@ -23,7 +36,7 @@ function Login() {
     const submitLogin = async () => {
         try {
             await dispatch(loginThunk({ username, password }));
-            navigate("/profile");
+            // navigate("/profile");
         } catch (err) {
             alert(err);
         }
@@ -65,7 +78,7 @@ function Login() {
                 <label className="btn btn-outline-light" htmlFor="listenerbutton">Listener Role</label>
             </div>
 
-            <button type="submit" className="btn btn-primary mt-2"
+            <button type="button" className="btn btn-primary mt-2"
             onClick={register? submitRegister : submitLogin}>
                 Submit</button>
         </fieldset>
