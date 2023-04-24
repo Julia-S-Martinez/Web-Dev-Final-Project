@@ -7,8 +7,14 @@ const api = axios.create({
 
 export const findPosts = async (currentUser) => {
     let response = '';
-    (currentUser?  response = await axios.get(POSTS_API_URL + '/home/' + currentUser)
+    (currentUser?  response = await axios.get(POSTS_API_URL + '/home/' + currentUser.id)
 : response = await axios.get(POSTS_API_URL + '/home'))
 
     return response.data;
 };
+
+export const findAllPosts = async () => {
+    const response = await axios.get(POSTS_API_URL + '/');
+    // console.log(response);
+    return response.data;
+}
