@@ -1,17 +1,17 @@
 import {useState} from "react";
 import {loginThunk, registerThunk} from "../services/auth-thunks";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import store from "../redux/store";
 
 
 function Login() {
-    let {currentUser} = useSelector((state) => state.currentUser);
+    const { currentUser } = useSelector((state) => state.currentUser);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [artist, setArtist] = useState(false);
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const submitRegister = async () => {
         try {
             const role = artist ? "ARTIST" : "LISTENER";
@@ -20,22 +20,21 @@ function Login() {
                 "password" : password,
                 "role": role
             }
-            console.log(newUser);
 
-            currentUser = (await store.dispatch(registerThunk(
-                {
-                    "username" : username,
-                    "password" : password,
-                    "role": role
-                })));
-            // navigate("/profile");
+            await store.dispatch(registerThunk(
+                newUser));
+            // verify that currentUser isupdated
+            console.log(currentUser);
+            navigate("/profile");
         } catch (err) {
             alert(err);
         }
     };
     const submitLogin = async () => {
         try {
-            await dispatch(loginThunk({ username, password }));
+            const user = await store.dispatch(loginThunk({ username, password }));
+
+            console.log("Currently Logged In User: " + currentUser);
             // navigate("/profile");
         } catch (err) {
             alert(err);

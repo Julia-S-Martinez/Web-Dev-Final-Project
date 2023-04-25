@@ -34,7 +34,7 @@ const Navigation = () => {
                             <a className="nav-link" href="/login">Login/Register</a>
                         </li>}
                         {currentUser && <li className="nav-item ml-auto">
-                            <a className="nav-link" href="/profile">Profile</a>
+                            <a className="nav-link" href="/profile">{currentUser["username"]}</a>
                         </li>}
                     </ul>
                 </div>

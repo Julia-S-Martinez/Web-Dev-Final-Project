@@ -12,12 +12,13 @@ const authSlice = createSlice({
     extraReducers: {
         [loginThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
+            console.log("Setting Current User to ", state.currentUser);
         },
         [logoutThunk.fulfilled]: (state) => {
             state.currentUser = null;
         },
         [profileThunk.fulfilled]: (state, { payload }) => {
-            state.currentUser = payload;
+            // state.currentUser = payload;
         },
         [updateUserThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;

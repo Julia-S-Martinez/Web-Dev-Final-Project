@@ -8,7 +8,7 @@ import {findLikesByUserId, findUserById} from "../services/users-service";
 
 const Profile = () => {
     const { userId } = useParams();
-    const { currentUser } = useSelector((state) => state.users);
+    const { currentUser } = useSelector((state) => state.currentUser);
     const [profile, setProfile] = useState(currentUser);
     const [likes, setLikes] = useState([]);
     const [following, setFollowing] = useState([]);

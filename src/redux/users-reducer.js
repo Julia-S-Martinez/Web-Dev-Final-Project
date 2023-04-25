@@ -24,22 +24,10 @@ const usersSlice = createSlice({
     reducers: {},
     extraReducers: {
         [updateUserThunk.fulfilled]: (state, action) => {
-            // state.currentUser = action.payload;
+            state.currentUser = action.payload;
             // state.users = state.users.map((user) =>
             //   user.id === action.payload.id ? action.payload : user
             // );
-        },
-        [loginThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload;
-        },
-        [logoutThunk.fulfilled]: (state, action) => {
-            state.currentUser = null;
-        },
-        [profileThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload;
-        },
-        [registerThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload;
         },
     },
 });
