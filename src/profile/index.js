@@ -34,15 +34,16 @@ const Profile = () => {
             return;
         }
         const response = await dispatch(profileThunk());
+        console.log("Received Profile Response Payload", response.payload);
         setProfile(response.payload);
     };
     const loadScreen = async () => {
         // if (!profile) {
-        await fetchProfile();
+        // await fetchProfile();
         // }
-        await fetchLikes();
-        await fetchFollowing();
-        await fetchFollowers();
+        //await fetchLikes();
+        //await fetchFollowing();
+        //await fetchFollowers();
     };
     const followUser = async () => {
         await userFollowsUser(currentUser._id, profile._id);
