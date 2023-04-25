@@ -14,7 +14,7 @@ const Navigation = () => {
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark m-2 ">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">Home</a>
+                <div onClick={() => navigate('/')}>Home</div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -31,10 +31,10 @@ const Navigation = () => {
                             </a>
                         </li>
                         {!currentUser && <li className="nav-item">
-                            <a className="nav-link" href="/login">Login/Register</a>
+                            <div onClick={() => navigate('/profile')}>Login/Register</div>
                         </li>}
                         {currentUser && <li className="nav-item ml-auto">
-                            <a className="nav-link" href="/profile">Profile</a>
+                            <div onClick={() => navigate('/profile')}>Profile</div>
                         </li>}
                     </ul>
                 </div>

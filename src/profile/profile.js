@@ -5,13 +5,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {findFollowsByFollowedId, findFollowsByFollowerId, userFollowsUser} from "../services/follows-service";
 import {profileThunk, updateUserThunk} from "../services/users-thunks";
 import {findLikesByUserId, findUserById} from "../services/users-service";
+import {logoutThunk} from "../services/auth-thunks";
 const Profile = () => {
     const { userId } = useParams();
-    const { currentUser } = useSelector((state) => state.users);
+    const { currentUser } = useSelector((state) => state.currentUser);
     const [profile, setProfile] = useState(currentUser);
     const [likes, setLikes] = useState([]);
     const [following, setFollowing] = useState([]);
     const [follows, setFollows] = useState([]);
+    const [edit, setEdit] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const fetchFollowing = async () => {
@@ -67,12 +69,9 @@ const Profile = () => {
                 </div>
                 <div className="col-6">
                     <div className="row">
-                        <div className="col-3">
-                            <img src="profile-pic.jpeg" className="rounded-circle w-75"/>
-                        </div>
                         <div className="col-9">
                             <h1>{profile.username}</h1>
-                            <Link to="/edit-profile">Edit Profile</Link>
+                            <div onClick={() => navigate('/edit-profile')}>Edit Profile</div>
                         </div>
                     </div>
                     <h1 className="pt-3">Recently Liked</h1>
@@ -112,6 +111,27 @@ const Profile = () => {
                     </ul>
                 </div>
             )}
+            {currentUser && (
+                <>
+            <div>
+
+                    <div>
+                        <h2>
+                            Welcome {currentUser.username} {currentUser._id}
+                        </h2>
+                    </div>
+
+            </div>
+            <button
+                className="btn btn-danger"
+                onClick={() => {
+                    dispatch(logoutThunk());
+                    navigate("/login");
+                }}
+            >
+                Logout
+            </button> </>
+                )}
         </div>
     );
 };
