@@ -13,8 +13,20 @@ export const findPosts = async (currentUser) => {
     return response.data;
 };
 
+export const findPostByTrackId = async (sid) => {
+    const response = await axios.get(process.env.REACT_APP_API + '/track/' + sid);
+    return response.data;
+}
+
 export const findAllPosts = async () => {
     const response = await axios.get(POSTS_API_URL + '/');
     // console.log(response);
+    return response.data;
+}
+
+export const likePost = async (post, currentUser) => {
+    const response = await axios.put(process.env.REACT_APP_API + '/like/post/' + post.id, {
+        userId: currentUser.id
+    });
     return response.data;
 }
