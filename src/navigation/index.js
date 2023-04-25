@@ -31,10 +31,10 @@ const Navigation = () => {
                             </a>
                         </li>
                         {!currentUser && <li className="nav-item">
-                            <div onClick={() => navigate('/profile')}>Login/Register</div>
+                            <a className="nav-link" href="/login">Login/Register</a>
                         </li>}
                         {currentUser && <li className="nav-item ml-auto">
-                            <div onClick={() => navigate('/profile')}>Profile</div>
+                            <a className="nav-link" href="/profile">Profile</a>
                         </li>}
                     </ul>
                 </div>

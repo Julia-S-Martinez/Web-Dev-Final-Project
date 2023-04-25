@@ -22,7 +22,7 @@ function Login() {
     const submitLogin = async () => {
         try {
             await dispatch(loginThunk({ username, password }));
-            //navigate("/profile");
+            navigate("/profile");
         } catch (err) {
             alert(err);
         }
@@ -64,7 +64,7 @@ function Login() {
                 <label className="btn btn-outline-light" htmlFor="listenerbutton">Listener Role</label>
             </div>
 
-            <button type="submit" className="btn btn-primary mt-2"
+            <button type="button" className="btn btn-primary mt-2"
             onClick={register? submitRegister : submitLogin}>
                 Submit</button>
         </fieldset>

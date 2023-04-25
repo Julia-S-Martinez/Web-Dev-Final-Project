@@ -13,7 +13,6 @@ const Profile = () => {
     const [likes, setLikes] = useState([]);
     const [following, setFollowing] = useState([]);
     const [follows, setFollows] = useState([]);
-    const [edit, setEdit] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const fetchFollowing = async () => {
