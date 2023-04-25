@@ -33,9 +33,10 @@ function Login() {
     const submitLogin = async () => {
         try {
             const user = await store.dispatch(loginThunk({ username, password }));
-
-            console.log("Currently Logged In User: " + currentUser);
-            // navigate("/profile");
+            if (user) {
+                console.log("Currently Logged In User: " + currentUser);
+                navigate("/profile");
+            }
         } catch (err) {
             alert(err);
         }

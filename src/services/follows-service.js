@@ -17,11 +17,11 @@ export const userUnfollowsUser = async (followerId, followedId) => {
 };
 
 export const findFollowsByFollowedId = async (followed) => {
-    const response = await axios.get(`${USERS_API}/${followed}/followers`);
+    const response = await axios.get(`${USERS_API}/followers/${followed}`);
     return response.data;
 };
 
 export const findFollowsByFollowerId = async (follower) => {
-    const response = await axios.get(`${USERS_API}/${follower}/followees`);
+    const response = await axios.get(`${USERS_API}/following/${follower}`);
     return response.data;
 };
