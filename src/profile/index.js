@@ -131,6 +131,7 @@ const Profile = () => {
                         className="btn btn-danger"
                         onClick={() => {
                             dispatch(logoutThunk());
+                            localStorage.clear();
                             navigate("/login");
                         }}
                     >

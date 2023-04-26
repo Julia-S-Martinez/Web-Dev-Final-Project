@@ -12,7 +12,7 @@ import Details from "./details";
 import {Provider, useSelector} from "react-redux";
 import store from "./redux/store";
 import CurrentUserContext from "./services/current-user-context";
-import Profile from "./profile/profile";
+import Profile from "./profile/";
 
 function App() {
   return (

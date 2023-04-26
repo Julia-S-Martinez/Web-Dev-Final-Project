@@ -17,13 +17,15 @@ const authSlice = createSlice({
         },
         [logoutThunk.fulfilled]: (state) => {
             state.currentUser = null;
-            localStorage.clear();
+
         },
         [profileThunk.fulfilled]: (state, { payload }) => {
             // state.currentUser = payload;
         },
         [updateUserThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
+            localStorage.setItem('user', JSON.stringify(state.currentUser));
+            console.log("Updating Current User to ", JSON.stringify(state.currentUser));
         },
         [registerThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;

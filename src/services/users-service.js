@@ -18,7 +18,7 @@ export const createUser = (user) => {
 };
 
 export const updateUser = (newUser) => {
-  return api.put(`${USERS_API_URL}/${newUser._id}`, newUser);
+  return api.put(`${USERS_API_URL}/${newUser.id}`, newUser);
 };
 
 export const deleteUser = (id) => {

@@ -1,6 +1,6 @@
 import {api_object} from "./api-setup";
 
-const USERS_URL = process.env.REACT_APP_SERVER_API_URL + "users";
+const USERS_URL = process.env.REACT_APP_SERVER_API_URL + "user";
 
 const api = api_object;
 
@@ -26,7 +26,8 @@ export const profile = async () => {
 
 
 export const updateUser = async (user) => {
-    const response = await api.put(`${USERS_URL}`, user);
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const response = await api.put(`${USERS_URL}/${currentUser.id}`);
     return response.data;
 };
 
