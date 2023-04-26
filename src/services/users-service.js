@@ -1,27 +1,26 @@
 import axios from "axios";
+import {api_object} from "./api-setup";
 const USERS_API_URL = process.env.REACT_APP_SERVER_API_URL + "/user";
 
+{/*
 const api = axios.create({
   withCredentials: true,
 });
+*/}
+const api = api_object;
 
 export const findAllUsers = async () => {
-  const response = await axios.get(USERS_API_URL);
+  const response = await api.get(USERS_API_URL);
   return response.data;
 };
 
 export const findUserById = async (id) => {
-  const response = await axios.get(`${USERS_API_URL}/${id}`);
+  const response = await api.get(`${USERS_API_URL}/${id}`);
   return response.data;
 };
 
-export const findLikesByUserId = async (id) => {
-  const response = await axios.get(`${USERS_API_URL}/${id}`);
-  return response.data.liked_songs;
-};
-
 export const createUser = (user) => {
-  return axios.post(USERS_API_URL, user);
+  return api.post(USERS_API_URL, user);
 };
 
 export const updateUser = (newUser) => {
@@ -29,5 +28,5 @@ export const updateUser = (newUser) => {
 };
 
 export const deleteUser = (id) => {
-  return axios.delete(`${USERS_API_URL}/${id}`);
+  return api.delete(`${USERS_API_URL}/${id}`);
 };

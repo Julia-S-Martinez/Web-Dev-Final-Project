@@ -4,13 +4,13 @@ import SongList from "../song_list";
 import {useDispatch, useSelector} from "react-redux";
 import {findFollowsByFollowedId, findFollowsByFollowerId, userFollowsUser} from "../services/follows-service";
 import {profileThunk, updateUserThunk} from "../services/auth-thunks";
-import {findLikesByUserId, findUserById} from "../services/users-service";
+import {findUserById} from "../services/users-service";
 
 const Profile = () => {
     const { userId } = useParams();
     const { currentUser } = useSelector((state) => state.currentUser);
     const [profile, setProfile] = useState(currentUser);
-    const [likes, setLikes] = useState([]);
+    const [likes, setLikes] = useState(currentUser.likes);
     const [following, setFollowing] = useState([]);
     const [follows, setFollows] = useState([]);
     const dispatch = useDispatch();
@@ -23,10 +23,7 @@ const Profile = () => {
         const follows = await findFollowsByFollowedId(profile._id);
         setFollows(follows);
     };
-    const fetchLikes = async () => {
-        const likes = await findLikesByUserId(profile._id);
-        setLikes(likes);
-    };
+
     const fetchProfile = async () => {
         if (userId) {
             const user = await findUserById(userId);
@@ -41,9 +38,12 @@ const Profile = () => {
         // if (!profile) {
         // await fetchProfile();
         // }
-        //await fetchLikes();
         //await fetchFollowing();
         //await fetchFollowers();
+        if (userId) {
+            const user = await findUserById(userId);
+            setProfile(user);
+        }
     };
     const followUser = async () => {
         await userFollowsUser(currentUser._id, profile._id);
@@ -58,9 +58,12 @@ const Profile = () => {
     return(
         <div>
             <h1>
-                <button onClick={followUser} className="btn btn-primary float-end">
-                    Follow
-                </button>
+                {
+                    userId !== undefined &&
+                    <button onClick={followUser} className="btn btn-primary float-end">
+                        Follow
+                    </button>
+                }
                 Profile {typeof userId !== undefined ? "me" : userId}
             </h1>
             {profile &&
