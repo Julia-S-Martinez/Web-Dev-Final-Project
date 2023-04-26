@@ -12,19 +12,24 @@ const authSlice = createSlice({
     extraReducers: {
         [loginThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
+            localStorage.setItem('user', JSON.stringify(state.currentUser));
+            console.log("Setting Current User to ", JSON.stringify(state.currentUser));
         },
         [logoutThunk.fulfilled]: (state) => {
             state.currentUser = null;
+            localStorage.clear();
         },
         [profileThunk.fulfilled]: (state, { payload }) => {
-            state.currentUser = payload;
+            // state.currentUser = payload;
         },
         [updateUserThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
         },
-        [register.fulfilled]: (state, { payload }) => {
+        [registerThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
+            localStorage.setItem('user', JSON.stringify(state.currentUser));
+            console.log("Setting Current User to ", JSON.stringify(state.currentUser));
         },
     },
 });
-export default userSlice.reducer;
+export default authSlice.reducer;

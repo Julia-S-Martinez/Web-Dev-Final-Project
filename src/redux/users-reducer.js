@@ -29,18 +29,6 @@ const usersSlice = createSlice({
             //   user.id === action.payload.id ? action.payload : user
             // );
         },
-        [loginThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload;
-        },
-        [logoutThunk.fulfilled]: (state, action) => {
-            state.currentUser = null;
-        },
-        [profileThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload;
-        },
-        [registerThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload;
-        },
     },
 });
 

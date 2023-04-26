@@ -6,7 +6,7 @@ import { ImMusic } from 'react-icons/im';
 const Navigation = () => {
     const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate()
-    const { currentUser } = useSelector((state) => state.currentUser);
+    const currentUser = JSON.parse(localStorage.getItem("user"));
 
     const submitSearch = () => {
         navigate(`/search/${searchValue}`)
@@ -35,7 +35,7 @@ const Navigation = () => {
                             <a className="nav-link" href="/login">Login/Register</a>
                         </li>}
                         {currentUser && <li className="nav-item ml-auto">
-                            <a className="nav-link" href="/profile">Profile</a>
+                            <a className="nav-link" href="/profile">{currentUser["username"]}</a>
                         </li>}
                     </ul>
                 </div>
