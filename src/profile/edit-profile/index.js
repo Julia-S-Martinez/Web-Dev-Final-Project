@@ -1,36 +1,47 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {updateUserThunk} from "../../services/auth-thunks";
 
 const EditProfile = () => {
+    const { currentUser } = useSelector((state) => state.currentUser);
+    const [username, setUsername] = useState(currentUser.username);
+    const [password, setPassword] = useState(currentUser.password);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const updateUser = async () => {
+        try {
+            await dispatch(updateUserThunk({username, password}));
+            navigate("/profile");
+        } catch (err) {
+            alert(err);
+        }
+    }
+
     return(
         <div className="row bg-opacity-25 bg-black">
             <div className="col-2 pt-3">
             </div>
             <div className="col-5">
                 <h1 className="pt-3">Edit Profile</h1>
-                <div className="row">
-                    <div className="col-12 pb-1">
-                        <img height={200} width={200} className="rounded-3" src="profile-pic.jpeg"/>
-                    </div>
-                    <div className="col-8">
-                        <a className="fw-bold">Edit Profile Picture</a>
-                        <input className="form-control" type="file" id="formFile" title="Edit Profile Picture"/>
-                    </div>
+                <div className="form-group">
+                    <label className="form-label mt-4" htmlFor="editUsername">Username</label>
+                    <input type="text" value={currentUser.username} className="form-control is-valid" id="editUsername"
+                           onChange={(e) => {
+                               setUsername(e.target.value);
+                           }}/>
                 </div>
-                <label htmlFor="inputUsername" className="form-label mt-4">Username</label>
-                <input type="username" className="form-control" id="inputPassword" placeholder="Username"/>
-                <label htmlFor="inputPassword1" className="form-label mt-4">Password</label>
-                <input type="password" className="form-control" id="inputPassword1" placeholder="Password"/>
-                <label htmlFor="inputEmail" className="form-label mt-4">Email</label>
-                <input type="email" className="form-control" id="inputEmail" placeholder="email"/>
-                <p className="pt-3 fw-bold">Bio</p>
-                <div className="input-group">
-                        <textarea className="form-control h-auto w-50" aria-label="With textarea"
-                                  value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non erat ut sapien
-                        molestie tempor at non libero. Nullam mattis volutpat tellus, iaculis ultrices odio finibus eu.
-                        Morbi tempus, massa a posuere eleifend, ipsum est sollicitudin ex, et congue eros sem vitae
-                        purus."></textarea>
+                <div className="form-group">
+                    <label className="form-label mt-4" htmlFor="editPassword">Username</label>
+                    <input type="text" value={currentUser.password} className="form-control is-valid" id="editPassword"
+                           onChange={(e) => {
+                               setPassword(e.target.value);
+                           }}/>
                 </div>
+                <button type="submit" className="btn btn-primary mt-2"
+                        onClick={updateUser}>
+                    Update User Information</button>
+
             </div>
         </div>
     );

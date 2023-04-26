@@ -3,15 +3,14 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import SongList from "../song_list";
 import {useDispatch, useSelector} from "react-redux";
 import {findFollowsByFollowedId, findFollowsByFollowerId, userFollowsUser} from "../services/follows-service";
-import {profileThunk, updateUserThunk, logoutThunk} from "../services/auth-thunks";
-import {findUserById} from "../services/users-service";
-
-
+import {profileThunk, updateUserThunk} from "../services/users-thunks";
+import {findLikesByUserId, findUserById} from "../services/users-service";
+import {logoutThunk} from "../services/auth-thunks";
 const Profile = () => {
     const { userId } = useParams();
-    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const { currentUser } = useSelector((state) => state.currentUser);
     const [profile, setProfile] = useState(currentUser);
-    const [likes, setLikes] = useState(currentUser.likes);
+    const [likes, setLikes] = useState([]);
     const [following, setFollowing] = useState([]);
     const [follows, setFollows] = useState([]);
     const dispatch = useDispatch();
@@ -24,7 +23,10 @@ const Profile = () => {
         const follows = await findFollowsByFollowedId(profile._id);
         setFollows(follows);
     };
-
+    const fetchLikes = async () => {
+        const likes = await findLikesByUserId(profile._id);
+        setLikes(likes);
+    };
     const fetchProfile = async () => {
         if (userId) {
             const user = await findUserById(userId);
@@ -32,19 +34,15 @@ const Profile = () => {
             return;
         }
         const response = await dispatch(profileThunk());
-        console.log("Received Profile Response Payload", response.payload);
         setProfile(response.payload);
     };
     const loadScreen = async () => {
         // if (!profile) {
-        // await fetchProfile();
+        await fetchProfile();
         // }
-        //await fetchFollowing();
-        //await fetchFollowers();
-        if (userId) {
-            const user = await findUserById(userId);
-            setProfile(user);
-        }
+        await fetchLikes();
+        await fetchFollowing();
+        await fetchFollowers();
     };
     const followUser = async () => {
         await userFollowsUser(currentUser._id, profile._id);
@@ -57,34 +55,30 @@ const Profile = () => {
         loadScreen();
     }, [userId]);
     return(
-        <>
-        {<div>
+        <div>
             <h1>
-                {
-                    userId !== undefined &&
-                    <button onClick={followUser} className="btn btn-primary float-end">
-                        Follow
-                    </button>
-                }
+                <button onClick={followUser} className="btn btn-primary float-end">
+                    Follow
+                </button>
                 Profile {typeof userId !== undefined ? "me" : userId}
             </h1>
             {profile &&
-                <div className="row pt-3">
-                    <div className="col-3">
-                    </div>
-                    <div className="col-6">
-                        <div className="row">
-                            <div className="col-9">
-                                <h1>{profile.username}</h1>
-                                <div onClick={() => navigate('/edit-profile')}>Edit Profile</div>
-                            </div>
+            <div className="row pt-3">
+                <div className="col-3">
+                </div>
+                <div className="col-6">
+                    <div className="row">
+                        <div className="col-9">
+                            <h1>{profile.username}</h1>
+                            <div onClick={() => navigate('/edit-profile')}>Edit Profile</div>
                         </div>
-                        <h1 className="pt-3">Recently Liked</h1>
-                        <SongList songsArray={likes}/>
                     </div>
-                    <div className="col-3">
-                    </div>
-                </div>}
+                    <h1 className="pt-3">Recently Liked</h1>
+                    <SongList songsArray={likes}/>
+                </div>
+                <div className="col-3">
+                </div>
+            </div>}
             {follows && (
                 <div>
                     <h2>Followers</h2>
@@ -118,28 +112,26 @@ const Profile = () => {
             )}
             {currentUser && (
                 <>
+            <div>
+
                     <div>
-
-                        <div>
-                            <h2>
-                                Welcome {currentUser.username} {currentUser._id}
-                            </h2>
-                        </div>
-
+                        <h2>
+                            Welcome {currentUser.username} {currentUser._id}
+                        </h2>
                     </div>
-                    <button
-                        className="btn btn-danger"
-                        onClick={() => {
-                            dispatch(logoutThunk());
-                            navigate("/login");
-                        }}
-                    >
-                        Logout
-                    </button> </>
-            )}
+
+            </div>
+            <button
+                className="btn btn-danger"
+                onClick={() => {
+                    dispatch(logoutThunk());
+                    navigate("/login");
+                }}
+            >
+                Logout
+            </button> </>
+                )}
         </div>
-        }
-        </>
     );
 };
 

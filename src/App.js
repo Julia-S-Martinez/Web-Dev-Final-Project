@@ -7,12 +7,12 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import EditProfile from "./profile/edit-profile";
 import SpotifySearchScreen from "./spotify/spotify-search";
-import Profile from "./profile";
+
 import Details from "./details";
 import {Provider, useSelector} from "react-redux";
 import store from "./redux/store";
 import CurrentUserContext from "./services/current-user-context";
-import {useEffect} from "react";
+import Profile from "./profile/profile";
 
 function App() {
   return (
@@ -20,10 +20,10 @@ function App() {
           <CurrentUserContext>
       <div className="container-fluid">
           <Provider store={store}>
-          <BrowserRouter>
+         git <BrowserRouter>
               <Navigation/>
               <Routes>
-                  <Route index element={<Home/>}/>
+                  <Route index path="/" element={<Home/>}/>
                   <Route path="/login" element={<Login/>}/>
                   <Route path="/profile" element={<Profile/>}/>
                   <Route path="/edit-profile" element={<EditProfile/>}/>

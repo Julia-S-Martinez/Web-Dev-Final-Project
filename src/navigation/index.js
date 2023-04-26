@@ -15,6 +15,7 @@ const Navigation = () => {
     return(
         <nav style={{fontSize: '25px'}} className="navbar navbar-expand-lg navbar-dark bg-gradient m-2 fw-bold">
             <div className="container-fluid">
+
                 <a className="navbar-brand" href="/"><ImMusic className="im-2x"/></a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
