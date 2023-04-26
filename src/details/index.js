@@ -1,13 +1,13 @@
 import {useParams} from "react-router-dom";
 import { getTrack} from "../spotify/spotify-service";
 import {useEffect, useState} from "react";
-import Comment from "../comments/comment"
 import {Heart, HeartFill} from "react-bootstrap-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {updatePostThunk} from "../services/posts-thunks";
+import {createPostThunk, updatePostThunk} from "../services/posts-thunks";
 import {findPostByTrackId} from "../services/posts-service";
 
 function Details() {
+    const currentUser = JSON.parse(localStorage.getItem("user"));
     const { sid } = useParams();
     console.log(sid);
     const [song, setSong] = useState();
@@ -21,24 +21,36 @@ function Details() {
     const findPost = async () => {
         const results = await findPostByTrackId(sid);
         setPost(results);
-        setHeart(post.likedUsers.includes(currentUser.userId) ? <HeartFill></HeartFill> : <Heart></Heart>);
+
         return;
+    }
+
+    const updateHeart = () => {
+        if(currentUser && post) {
+            if(currentUser.liked_songs.includes(post._id) && post.likedUsers.includes(currentUser._id)) {
+                setHeart(<HeartFill></HeartFill>)
+            }
+        }
     }
 
     // console.log(song);
     useEffect(() => {
         searchSpotify()
         findPost()
+        updateHeart()
     }, [sid]);
 
-
-    const { currentUser } = useSelector((state) => state.currentUser);
     const dispatch = useDispatch();
 
     const likeButton = () => {
         if (currentUser) {
-            dispatch (updatePostThunk({post}));
+            console.log(sid);
+            const response = dispatch(createPostThunk(sid, song.artists[0].name));
+            setPost(response.payload);
+            console.log(post);
+            dispatch (updatePostThunk(post, currentUser));
             findPost();
+            updateHeart();
         } else {
             alert("Please login to like this song!")
         }
