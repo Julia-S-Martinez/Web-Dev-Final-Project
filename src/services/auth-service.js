@@ -26,8 +26,8 @@ export const profile = async () => {
 
 
 export const updateUser = async (user) => {
-    const currentUser = JSON.parse(localStorage.getItem("user"));
-    const response = await api.put(`${USERS_URL}/${currentUser.id}`);
+    //const currentUser = JSON.parse(localStorage.getItem("user"));
+    const response = await api.put(`${USERS_URL}`, user);
     return response.data;
 };
 
