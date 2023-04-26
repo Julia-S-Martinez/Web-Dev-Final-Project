@@ -20,7 +20,7 @@ const EditProfile = () => {
     }
 
     return(
-        <div className="row bg-opacity-25 bg-black">
+        <div className="row">
             <div className="col-2 pt-3">
             </div>
             <div className="col-5">
@@ -33,13 +33,13 @@ const EditProfile = () => {
                            }}/>
                 </div>
                 <div className="form-group">
-                    <label className="form-label mt-4" htmlFor="editPassword">Username</label>
+                    <label className="form-label mt-4" htmlFor="editPassword">Password</label>
                     <input type="text" defaultValue={currentUser.password} className="form-control" id="editPassword"
                            onChange={(e) => {
                                setPassword(e.target.value);
                            }}/>
                 </div>
-                <button type="button" className="btn btn-primary mt-2"
+                <button type="button" className="btn btn-primary mt-5"
                         onClick={updateUser}>
                     Update User Information</button>
 

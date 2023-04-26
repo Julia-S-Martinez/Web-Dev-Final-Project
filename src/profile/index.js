@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {findFollowsByFollowedId, findFollowsByFollowerId, userFollowsUser} from "../services/follows-service";
 import {profileThunk, updateUserThunk, logoutThunk} from "../services/auth-thunks";
 import {findUserById} from "../services/users-service";
+import {Gear, MusicNote} from "react-bootstrap-icons";
 
 
 const Profile = () => {
@@ -59,15 +60,9 @@ const Profile = () => {
     return(
         <>
         {<div>
-            <h1>
-                {
-                    userId !== undefined &&
-                    <button onClick={followUser} className="btn btn-primary float-end">
-                        Follow
-                    </button>
-                }
-                Profile {typeof userId !== undefined ? "me" : userId}
-            </h1>
+            <div>
+
+            </div>
             {profile &&
                 <div className="row pt-3">
                     <div className="col-3">
@@ -75,8 +70,53 @@ const Profile = () => {
                     <div className="col-6">
                         <div className="row">
                             <div className="col-9">
-                                <h1>{profile.username}</h1>
-                                <div onClick={() => navigate('/edit-profile')}>Edit Profile</div>
+                                <h1 className="mb-5">
+                                    {
+                                        userId !== undefined &&
+                                        <button onClick={followUser} className="btn btn-primary float-end">
+                                            Follow
+                                        </button>
+                                    }
+                                    {typeof userId !== undefined ? "My Profile" : userId + "'s Profile"}
+                                </h1>
+                                <div className="d-flex align-items-center">
+                                    <MusicNote className="mb-2" size={30}/>
+                                    <h1 className="pe-5">{profile.username}</h1>
+                                    <div onClick={() => navigate('/edit-profile')}><Gear size={30} className="mb-2 ms-5"/></div>
+                                </div>
+
+                                <div className="d-flex">
+                                    {follows && (
+                                        <div className="pe-3">
+                                            <h4>Followers</h4>
+                                            <ul className="list-group">
+                                                {follows.map((follow) => (
+                                                    <li className="list-group-item">
+                                                        <Link to={`/profile/${follow.follower.username}`}>
+                                                            <h3>{follow.follower.username}</h3>
+                                                            <h3>{follow.follower._id}</h3>
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                    {following && (
+                                        <div>
+                                            <h4>Following</h4>
+                                            <ul className="list-group">
+                                                {following.map((follow) => (
+                                                    <li className="list-group-item">
+                                                        <Link to={`/profile/${follow.followed.username}`}>
+                                                            <h3>{follow.followed.username}</h3>
+                                                            <h3>{follow.followed._id}</h3>
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                         <h1 className="pt-3">Recently Liked</h1>
@@ -85,59 +125,28 @@ const Profile = () => {
                     <div className="col-3">
                     </div>
                 </div>}
-            {follows && (
-                <div>
-                    <h2>Followers</h2>
-                    <ul className="list-group">
-                        {follows.map((follow) => (
-                            <li className="list-group-item">
-                                <Link to={`/profile/${follow.follower.username}`}>
-                                    <h3>{follow.follower.username}</h3>
-                                    <h3>{follow.follower._id}</h3>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-
-            {following && (
-                <div>
-                    <h2>Following</h2>
-                    <ul className="list-group">
-                        {following.map((follow) => (
-                            <li className="list-group-item">
-                                <Link to={`/profile/${follow.followed.username}`}>
-                                    <h3>{follow.followed.username}</h3>
-                                    <h3>{follow.followed._id}</h3>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
             {currentUser && (
                 <>
                     <div>
 
-                        <div>
-                            <h2>
-                                Welcome {currentUser.username} {currentUser._id}
-                            </h2>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <h2>*/}
+                        {/*        Welcome {currentUser.username} {currentUser._id}*/}
+                        {/*    </h2>*/}
+                        {/*</div>*/}
 
                     </div>
                     <button
-                        className="btn btn-danger"
+                        className="btn btn-secondary d-flex mt-5 m-auto"
                         onClick={() => {
                             dispatch(logoutThunk());
                             localStorage.clear();
                             navigate("/login");
-                        }}
-                    >
+                        }}>
                         Logout
-                    </button> </>
-            )}npm
+                    </button>
+                </>
+            )}
         </div>
         }
         </>
