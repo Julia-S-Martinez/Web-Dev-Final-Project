@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { profileThunk } from "./users-thunks";
+import {useDispatch, useSelector} from "react-redux";
+import { profileThunk } from "./auth-thunks";
 function CurrentUserContext({ children }) {
-    const dispatch = useDispatch();
+    let { currentUser } = useSelector((state) => state.currentUser);
+    // const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(profileThunk());
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+            currentUser = JSON.parse(loggedInUser);
+        }
     }, []);
     return children;
 }

@@ -9,7 +9,7 @@ import EditProfile from "./profile/edit-profile";
 import SpotifySearchScreen from "./spotify/spotify-search";
 
 import Details from "./details";
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 import store from "./redux/store";
 import CurrentUserContext from "./services/current-user-context";
 import Profile from "./profile/profile";
@@ -20,7 +20,7 @@ function App() {
           <CurrentUserContext>
       <div className="container-fluid">
           <Provider store={store}>
-          <BrowserRouter>
+         git <BrowserRouter>
               <Navigation/>
               <Routes>
                   <Route index path="/" element={<Home/>}/>
