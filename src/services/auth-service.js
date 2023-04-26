@@ -1,6 +1,6 @@
 import {api_object} from "./api-setup";
 
-const USERS_URL = process.env.REACT_APP_SERVER_API_URL + "user";
+const USERS_URL = process.env.REACT_APP_SERVER_API_URL + "/users";
 
 const api = api_object;
 
