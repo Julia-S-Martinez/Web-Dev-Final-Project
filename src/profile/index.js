@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import SongList from "../song_list";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {findFollowsByFollowedId, findFollowsByFollowerId, userFollowsUser} from "../services/follows-service";
 import {profileThunk, updateUserThunk, logoutThunk} from "../services/auth-thunks";
 import {findUserById} from "../services/users-service";
@@ -137,7 +137,7 @@ const Profile = () => {
                     >
                         Logout
                     </button> </>
-            )}
+            )}npm
         </div>
         }
         </>
