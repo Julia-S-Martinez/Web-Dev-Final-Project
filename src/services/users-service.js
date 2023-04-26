@@ -1,12 +1,6 @@
-import axios from "axios";
 import {api_object} from "./api-setup";
 const USERS_API_URL = process.env.REACT_APP_SERVER_API_URL + "/user";
 
-{/*
-const api = axios.create({
-  withCredentials: true,
-});
-*/}
 const api = api_object;
 
 export const findAllUsers = async () => {

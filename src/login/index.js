@@ -3,10 +3,11 @@ import {loginThunk, registerThunk} from "../services/auth-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import store from "../redux/store";
+import {current} from "@reduxjs/toolkit";
 
 
 function Login() {
-    const { currentUser } = useSelector((state) => state.currentUser);
+    const currentUser = localStorage.getItem("user");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [artist, setArtist] = useState(false);
@@ -21,10 +22,10 @@ function Login() {
                 "role": role
             }
 
-            await store.dispatch(registerThunk(
-                newUser));
+            const user_response = await (store.dispatch(registerThunk(
+                newUser)));
             // verify that currentUser isupdated
-            console.log(currentUser);
+            console.log("Just Registered", user_response['payload']);
             navigate("/profile");
         } catch (err) {
             alert(err);
@@ -34,9 +35,11 @@ function Login() {
         try {
             const user = await store.dispatch(loginThunk({ username, password }));
             if (user) {
-                console.log("Currently Logged In User: " + currentUser);
+                console.log("Server Response Data : ", user);
+                // console.log("Currently Logged In User: ", currentUser);
                 navigate("/profile");
             }
+
         } catch (err) {
             alert(err);
         }

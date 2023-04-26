@@ -1,10 +1,7 @@
-import axios from "axios";
 import {api_object} from "./api-setup";
 
-const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
-const USERS_API = `${SERVER_API_URL}/users`;
+const USERS_API = process.env.REACT_APP_SERVER_API_URL + "users";
 
-// const api = axios.create({ withCredentials: true });
 const api = api_object;
 
 

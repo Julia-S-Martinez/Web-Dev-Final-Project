@@ -3,12 +3,13 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import SongList from "../song_list";
 import {useDispatch, useSelector} from "react-redux";
 import {findFollowsByFollowedId, findFollowsByFollowerId, userFollowsUser} from "../services/follows-service";
-import {profileThunk, updateUserThunk} from "../services/auth-thunks";
+import {profileThunk, updateUserThunk, logoutThunk} from "../services/auth-thunks";
 import {findUserById} from "../services/users-service";
+
 
 const Profile = () => {
     const { userId } = useParams();
-    const { currentUser } = useSelector((state) => state.currentUser);
+    const currentUser = JSON.parse(localStorage.getItem("user"));
     const [profile, setProfile] = useState(currentUser);
     const [likes, setLikes] = useState(currentUser.likes);
     const [following, setFollowing] = useState([]);
@@ -56,6 +57,8 @@ const Profile = () => {
         loadScreen();
     }, [userId]);
     return(
+        <>
+        {currentUser !== null &&
         <div>
             <h1>
                 {
@@ -67,25 +70,37 @@ const Profile = () => {
                 Profile {typeof userId !== undefined ? "me" : userId}
             </h1>
             {profile &&
-                <div className="row pt-3">
-                    <div className="col-3">
-                    </div>
-                    <div className="col-6">
-                        <div className="row">
-                            <div className="col-3">
-                                <img src="profile-pic.jpeg" className="rounded-circle w-75"/>
-                            </div>
-                            <div className="col-9">
-                                <h1>{profile.username}</h1>
-                                <Link to="/edit-profile">Edit Profile</Link>
-                            </div>
+                <>
+                    <div className="row pt-3">
+                        <div className="col-3">
                         </div>
-                        <h1 className="pt-3">Recently Liked</h1>
-                        <SongList songsArray={likes}/>
+                        <div className="col-6">
+                            <div className="row">
+                                <div className="col-3">
+                                    <img src="profile-pic.jpeg" className="rounded-circle w-75"/>
+                                </div>
+                                <div className="col-9">
+                                    <h1>{profile.username}</h1>
+                                    <Link to="/edit-profile">Edit Profile</Link>
+                                </div>
+                            </div>
+                            <h1 className="pt-3">Recently Liked</h1>
+                            <SongList songsArray={likes}/>
+                        </div>
+                        <div className="col-3">
+                        </div>
                     </div>
-                    <div className="col-3">
-                    </div>
-                </div>}
+                    <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                            dispatch(logoutThunk());
+                            navigate("/login");
+                        }}
+                    >
+                        Logout
+                    </button>
+                </>
+            }
             {follows && (
                 <div>
                     <h2>Followers</h2>
@@ -118,6 +133,8 @@ const Profile = () => {
                 </div>
             )}
         </div>
+        }
+        </>
     );
 };
 

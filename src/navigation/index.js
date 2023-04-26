@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 const Navigation = () => {
     const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate()
-    const { currentUser } = useSelector((state) => state.currentUser);
+    const currentUser = JSON.parse(localStorage.getItem("user"));
 
     const submitSearch = () => {
         navigate(`/search/${searchValue}`)
