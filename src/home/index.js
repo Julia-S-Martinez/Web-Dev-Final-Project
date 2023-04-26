@@ -1,11 +1,14 @@
 import Recommended from "./recommended";
+import SpotifySearchScreen from "../spotify/spotify-search";
+import HomeFeed from "./recommended";
 
-const Home = (
-) => {
+const Home = () => {
     return(
         <>
-            <h2>Recently Liked Songs</h2>
-            {/*<Recommended />*/}
+            <div className="col-6 m-auto">
+                <h2>Recently Liked Songs</h2>
+            </div>
+            <Recommended />
         </>
     )
 };
