@@ -37,7 +37,7 @@ const Profile = () => {
     };
     const loadScreen = async () => {
         // if (!profile) {
-        // await fetchProfile();
+        await fetchProfile();
         // }
         //await fetchFollowing();
         //await fetchFollowers();

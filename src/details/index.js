@@ -23,8 +23,10 @@ function Details() {
     };
     const findPost = async () => {
         const results = await findPostByTrackId(sid);
+        console.log("setting post: ", results[results.length - 1])
         if (results.length > 0) {
             setPost(results[results.length - 1]);
+            console.log("post set!")
         } else {
             setPost(null);
         }
@@ -34,13 +36,11 @@ function Details() {
     const updateHeart = () => {
         console.log("Post: ", post);
         console.log("Current user: ", currentUser);
-        if(currentUser && post) {
-            if(currentUser.liked_songs.includes(post._id) && post.likedUsers.includes(currentUser._id)) {
+            if(post && post.likedUsers.includes(currentUser._id)) {
                 setHeart(<HeartFill></HeartFill>);
             } else {
                 setHeart(<Heart></Heart>);
             }
-        }
     }
 
     // console.log(song);
@@ -50,10 +50,16 @@ function Details() {
         updateHeart()
     }, [sid]);
 
+
+    useEffect(() => {
+        updateHeart()
+        updateUser()
+    }, [post]);
+
     const dispatch = useDispatch();
     const updateUser = async () => {
-        currentUser = await profile();
-        console.log("Currently Signed in User", currentUser);
+        const newUser = await profile();
+        console.log("Currently Signed in User", newUser);
         localStorage.setItem('user', JSON.stringify(currentUser));
     }
 
@@ -70,8 +76,8 @@ function Details() {
                 await dispatch(updatePostThunk({post: post, currentUser: currentUser}));
             }
             await findPost();
-            await updateUser();
             updateHeart();
+            await updateUser();
         } else {
             alert("Please login to like this song!")
         }
