@@ -1,13 +1,13 @@
 import {api_object} from "./api-setup";
 
-const USERS_API = process.env.REACT_APP_SERVER_API_URL + "users";
+const USERS_API = process.env.REACT_APP_SERVER_API_URL + "/user";
 
 const api = api_object;
 
 
 export const userFollowsUser = async (followerId, followedId) => {
-    const response = await api.post(
-        `${USERS_API}/${followerId}/follows/${followedId}`
+    const response = await api.put(
+        `${USERS_API}/follow/${followedId}`, {"follower":followerId}
     );
     return response.data;
 };

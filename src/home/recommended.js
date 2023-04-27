@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {findAllPosts, findPosts} from "../services/posts-service";
 import {getTrack} from "../spotify/spotify-service";
 import SongItemWithName from "../song_list/song_item_with_name";
+import {findUserById} from "../services/users-service";
 // import songArray from "./home-songs.json";
 
 function Recommended() {
@@ -14,7 +15,8 @@ function Recommended() {
         // console.log(recommendedList);
         const promises = recommendedList.map(async (post) => {
             let song = await getTrack(post.trackId);
-            song.username = post.likedUsers[0];
+            const userId = post.likedUsers[0];
+            song.user = await findUserById(userId);
             console.log(song);
             return song;
         });
@@ -31,7 +33,7 @@ function Recommended() {
         <div className="w-50 m-auto">
             {songs && songs.map((result) =>
                 <SongItemWithName song={result}/>
-            )}
+            ).reverse()}
         </div>
     );
 }

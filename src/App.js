@@ -20,7 +20,8 @@ function App() {
           <CurrentUserContext>
       <div className="container-fluid">
           <Provider store={store}>
-         git <BrowserRouter>
+
+         <BrowserRouter>
               <Navigation/>
               <Routes>
                   <Route index path="/" element={<Home/>}/>
@@ -28,7 +29,7 @@ function App() {
                   <Route path="/profile" element={<Profile/>}/>
                   <Route path="/edit-profile" element={<EditProfile/>}/>
                   <Route path="/search/:query" element={<SpotifySearchScreen/>}/>
-                  <Route path="/profile/:uid" element={<Profile/>}/>
+                  <Route path="/profile/:userId" element={<Profile/>}/>
                   <Route path="/details/:sid" element={<Details />}/>
               </Routes>
           </BrowserRouter>

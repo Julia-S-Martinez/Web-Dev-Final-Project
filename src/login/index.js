@@ -73,14 +73,14 @@ function Login() {
                            setPassword(e.target.value);
                        }}/>
             </div>
-            <div className="btn-group mx-auto w-100 mt-2"  aria-label="Basic radio toggle button group">
+            {register && <div className="btn-group mx-auto w-100 mt-2"  aria-label="Basic radio toggle button group">
                 <input type="radio" className="btn-check w-50" name="rolebuttons" id="artistbutton" onClick={()=>{setArtist(true)}}
                        autoComplete="off" checked={artist} readOnly/>
                 <label className="btn btn-outline-light" htmlFor="artistbutton">Artist Role</label>
                 <input type="radio" className="btn-check w-50" name="rolebuttons" id="listenerbutton" onClick={()=>{setArtist(false)}}
                        autoComplete="off" checked={!artist} readOnly/>
                 <label className="btn btn-outline-light" htmlFor="listenerbutton">Listener Role</label>
-            </div>
+            </div>}
 
             <button type="button" className="btn btn-primary mt-2"
             onClick={register? submitRegister : submitLogin}>

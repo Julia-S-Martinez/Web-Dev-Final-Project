@@ -16,6 +16,7 @@ function Details() {
     const [song, setSong] = useState();
     const [post, setPost] = useState();
     const [heart, setHeart] = useState(<Heart></Heart>);
+    const [claimed, setClaimed] = useState(<div className="badge bg-warning">Claim this song</div>);
     const searchSpotify = async () => {
         const results = await getTrack(sid);
         setSong(results);
@@ -38,8 +39,10 @@ function Details() {
         console.log("Current user: ", currentUser);
             if(post && post.likedUsers.includes(currentUser._id)) {
                 setHeart(<HeartFill></HeartFill>);
+                setClaimed(<div className="badge bg-warning">Song claimed!</div>)
             } else {
                 setHeart(<Heart></Heart>);
+                setClaimed(<div className="badge bg-success">Claim this song</div>)
             }
     }
 
@@ -97,7 +100,7 @@ function Details() {
                                     <div className="ms-4 mt-4">
                                         <div className="fw-bold d-flex" style={{ fontSize: "50px" }}>
                                             <div className="pe-2" onClick={likeButton}>
-                                                {heart}
+                                                {currentUser && currentUser.role=="ARTIST" ? claimed : heart}
                                             </div>
                                             {song.name}
                                         </div>
@@ -132,7 +135,7 @@ function Details() {
                                     <div className="ms-4 mt-2 pb-3">
                                         <div className="fw-bold d-flex" style={{ fontSize: "50px" }}>
                                             <div className="pe-2" onClick={likeButton}>
-                                                {heart}
+                                                {currentUser && currentUser.role=="ARTIST" ? claimed : heart}
                                             </div>
                                             {song.name}
                                         </div>
