@@ -16,7 +16,7 @@ function Details() {
     const [song, setSong] = useState();
     const [post, setPost] = useState();
     const [heart, setHeart] = useState(<Heart></Heart>);
-    const [claimed, setClaimed] = useState(<div className="badge bg-warning">Claim this song</div>);
+    const [claimed, setClaimed] = useState(<div className="badge bg-warning" style={{fontSize: "20px"}}>Claim this song</div>);
     const searchSpotify = async () => {
         const results = await getTrack(sid);
         setSong(results);
@@ -39,10 +39,10 @@ function Details() {
         console.log("Current user: ", currentUser);
             if(post && post.likedUsers.includes(currentUser._id)) {
                 setHeart(<HeartFill></HeartFill>);
-                setClaimed(<div className="badge bg-warning">Song claimed!</div>)
+                setClaimed(<div className="badge bg-warning" style={{fontSize: "20px"}}>Song claimed!</div>)
             } else {
                 setHeart(<Heart></Heart>);
-                setClaimed(<div className="badge bg-success">Claim this song</div>)
+                setClaimed(<div className="badge bg-success" style={{fontSize: "20px"}}>Claim this song</div>)
             }
     }
 
