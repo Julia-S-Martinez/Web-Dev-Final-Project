@@ -20,7 +20,7 @@ function App() {
           <CurrentUserContext>
       <div className="container-fluid">
           <Provider store={store}>
-         git <BrowserRouter>
+          <BrowserRouter>
               <Navigation/>
               <Routes>
                   <Route index path="/" element={<Home/>}/>

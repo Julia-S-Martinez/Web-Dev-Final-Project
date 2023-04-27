@@ -1,8 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import { ImMusic } from 'react-icons/im';
-
+import { ImMusic, ImHome, ImUser } from 'react-icons/im';
 const Navigation = () => {
     const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate()
@@ -13,14 +12,14 @@ const Navigation = () => {
     }
 
     return(
-        <nav style={{fontSize: '25px'}} className="navbar navbar-expand-lg navbar-dark bg-gradient m-2 fw-bold">
+        <nav style={{fontSize: '25px'}} className="navbar navbar-expand-sm navbar-dark bg-gradient m-2 fw-bold">
             <div className="container-fluid">
 
                 <a className="navbar-brand" href="/"><ImMusic className="im-2x"/></a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                {/*<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"*/}
+                {/*        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">*/}
+                {/*    <span className="navbar-toggler-icon"></span>*/}
+                {/*</button>*/}
                 <div className="collapse navbar-collapse" id="navbarColor02">
                     <form className="d-flex">
                         <input className="form-control me-sm-2 w-full" type="search" placeholder="Search" onChange={(e) => setSearchValue(e.target.value)}/>
@@ -28,12 +27,14 @@ const Navigation = () => {
                     </form>
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link active" href="/">Explore
+                            <a className="nav-link active d-none d-lg-none d-xl-block" href="/">Explore
                                 <span className="visually-hidden">(current)</span>
                             </a>
+                            <ImHome className="d-lg-block d-xl-none"/>
                         </li>
                         {!currentUser && <li className="nav-item">
-                            <a className="nav-link" href="/login">Login/Register</a>
+                            <a className="nav-link d-none d-lg-none d-xl-block" href="/login">Login/Register</a>
+                            <ImUser className="d-lg-block d-xl-none me-2 ms-2"/>
                         </li>}
                         {currentUser && <li className="nav-item ml-auto">
                             <a className="nav-link" href="/profile">{currentUser["username"]}</a>
