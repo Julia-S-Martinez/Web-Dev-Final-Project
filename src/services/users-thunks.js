@@ -19,7 +19,7 @@ export const createUserThunk = createAsyncThunk(
   "users/create",
   async (user) => {
     const response = await userService.createUser(user);
-    return response.data;
+    return response;
   }
 );
 // updateProfileThunk

@@ -13,8 +13,9 @@ export const findUserById = async (id) => {
   return response.data;
 };
 
-export const createUser = (user) => {
-  return api.post(USERS_API_URL, user);
+export const createUser = async (user) => {
+  const response = await api.post(USERS_API_URL, user);
+  return response.data;
 };
 
 export const updateUser = (newUser) => {

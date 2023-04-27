@@ -5,9 +5,12 @@ import {Heart, HeartFill} from "react-bootstrap-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {createPostThunk, updatePostThunk} from "../services/posts-thunks";
 import {findPostByTrackId} from "../services/posts-service";
+import {createPost} from "../services/posts-service"
+import {profile} from "../services/auth-service";
+import store from "../redux/store";
 
 function Details() {
-    const currentUser = JSON.parse(localStorage.getItem("user"));
+    let currentUser = JSON.parse(localStorage.getItem("user"));
     const { sid } = useParams();
     console.log(sid);
     const [song, setSong] = useState();
@@ -20,15 +23,22 @@ function Details() {
     };
     const findPost = async () => {
         const results = await findPostByTrackId(sid);
-        setPost(results);
-
+        if (results.length > 0) {
+            setPost(results[results.length - 1]);
+        } else {
+            setPost(null);
+        }
         return;
     }
 
     const updateHeart = () => {
+        console.log("Post: ", post);
+        console.log("Current user: ", currentUser);
         if(currentUser && post) {
             if(currentUser.liked_songs.includes(post._id) && post.likedUsers.includes(currentUser._id)) {
-                setHeart(<HeartFill></HeartFill>)
+                setHeart(<HeartFill></HeartFill>);
+            } else {
+                setHeart(<Heart></Heart>);
             }
         }
     }
@@ -41,15 +51,26 @@ function Details() {
     }, [sid]);
 
     const dispatch = useDispatch();
+    const updateUser = async () => {
+        currentUser = await profile();
+        console.log("Currently Signed in User", currentUser);
+        localStorage.setItem('user', JSON.stringify(currentUser));
+    }
 
-    const likeButton = () => {
+    const likeButton = async () => {
         if (currentUser) {
             console.log(sid);
-            const response = dispatch(createPostThunk(sid, song.artists[0].name));
-            setPost(response.payload);
-            console.log(post);
-            dispatch (updatePostThunk(post, currentUser));
-            findPost();
+            // console.log("Attempting to Create Artist with name: ", song.artists[0].name);
+            // const response = store.dispatch(createPostThunk({trackId: sid, userId: song.artists[0].name}));
+            if (post === null) {
+                const response = await createPost(sid, song.artists[0].name);
+                console.log("Response: ", response);
+                await dispatch(updatePostThunk({post: response, currentUser: currentUser}));
+            } else {
+                await dispatch(updatePostThunk({post: post, currentUser: currentUser}));
+            }
+            await findPost();
+            await updateUser();
             updateHeart();
         } else {
             alert("Please login to like this song!")
