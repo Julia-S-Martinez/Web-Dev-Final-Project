@@ -20,8 +20,7 @@ function App() {
           <CurrentUserContext>
       <div className="container-fluid">
           <Provider store={store}>
-
-         <BrowserRouter>
+          <BrowserRouter>
               <Navigation/>
               <Routes>
                   <Route index path="/" element={<Home/>}/>

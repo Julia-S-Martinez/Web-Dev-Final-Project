@@ -5,7 +5,7 @@ const SongList = (
 ) => {
     return(
         <div className="col-md-12">
-            {songsArray.length === 0 && <h1>No Songs Yet!</h1>}
+            {songsArray.length === 0 && <h3>No Songs Yet!</h3>}
             {songsArray &&
                 songsArray.map(song =>
                     <SongItem song={song}/> )
