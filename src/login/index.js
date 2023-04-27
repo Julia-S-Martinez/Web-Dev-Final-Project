@@ -79,6 +79,9 @@ function Login() {
                                    setPassword(e.target.value);
                                }}/>
                     </div>
+                    
+                    {register && 
+                    <>
                     <div>
                         <h4>Choose your role:</h4>
                         <p>Listeners will be able to like and share songs with their friends.
@@ -92,6 +95,8 @@ function Login() {
                                autoComplete="off" checked={!artist} readOnly/>
                         <label className="btn btn-outline-light" htmlFor="listenerbutton">Listener Role</label>
                     </div>
+                    </>}
+
 
                     <button type="button" className="btn btn-primary mt-4 m-auto d-flex"
                             onClick={register? submitRegister : submitLogin}>

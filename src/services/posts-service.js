@@ -1,6 +1,6 @@
 import {api_object} from "./api-setup";
 import axios from "axios";
-const POSTS_API_URL = process.env.REACT_APP_SERVER_API_URL + "post";
+const POSTS_API_URL = process.env.REACT_APP_SERVER_API_URL + "/post";
 
 
 {/*
@@ -20,7 +20,7 @@ export const findPosts = async (currentUser) => {
 };
 
 export const findPostByTrackId = async (sid) => {
-    const response = await axios.get(process.env.REACT_APP_API + '/track/' + sid);
+    const response = await axios.get(process.env.REACT_APP_SERVER_API_URL + '/track/' + sid);
     return response.data;
 }
 
@@ -31,8 +31,18 @@ export const findAllPosts = async () => {
 }
 
 export const likePost = async (post, currentUser) => {
-    const response = await axios.put(process.env.REACT_APP_API + '/like/post/' + post.id, {
-        userId: currentUser.id
+    const response = await axios.put(process.env.REACT_APP_SERVER_API_URL + '/like/post/' + post._id, {
+        userId: currentUser._id
+    });
+    return response.data;
+}
+
+export const createPost = async (trackId, userId) => {
+    // console.log("userId in createPost:", userId);
+    const response = await api.post(process.env.REACT_APP_SERVER_API_URL + '/post/' + trackId + '/' + userId, {
+        likedUsers:[],
+        claimed: false,
+        comments: []
     });
     return response.data;
 }

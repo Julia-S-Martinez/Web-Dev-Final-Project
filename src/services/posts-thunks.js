@@ -3,7 +3,14 @@ import * as service from './posts-service';
 
 export const updatePostThunk = createAsyncThunk(
     "posts/updatePost",
-async (post) =>
-    await service.likePost(post)
+async ({post, currentUser}) =>
+    await service.likePost(post, currentUser)
+)
+
+export const createPostThunk = createAsyncThunk(
+    "posts/updatePost",
+    async ({trackId, userId}) => {
+        return await service.createPost(trackId, userId);
+    }
 )
 
